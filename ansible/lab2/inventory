@@ -1,0 +1,5 @@
+[webservers]
+webserver.example.com ansible_host=10.61.175.57
+
+[jenkins_agents]
+jenkins.example.com ansible_host=10.61.175.57

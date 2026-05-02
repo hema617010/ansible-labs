@@ -1,0 +1,11 @@
+- name: Web Server Play
+  hosts: webservers
+  vars:
+    my_name: "Ibrahim Samy"
+  roles:
+    - iti-webserver-role
+
+- name: Jenkins Play
+  hosts: jenkins_agents
+  roles:
+    - jenkins-role

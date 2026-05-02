@@ -1,0 +1,38 @@
+- name: Setup server (users + dirs + packages)
+  hosts: servers
+
+  vars:
+    username: devuser
+    user_id: 5000
+    project_dir: /home/devuser/project
+
+  tasks:
+
+    - name: Create user
+      user:
+        name: "{{ username }}"
+        uid: "{{ user_id }}"
+        state: present
+        shell: /bin/bash
+
+    - name: Create project directory
+      file:
+        path: "{{ project_dir }}"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0755'
+
+    - name: Install packages
+      package:
+        name:
+          - git
+          - vim
+        state: present
+
+    - name: Create a README file
+      copy:
+        dest: "{{ project_dir }}/README.txt"
+        content: |
+          This server is managed by Ansible.
+          User: {{ username }}
